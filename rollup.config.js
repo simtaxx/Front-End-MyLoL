@@ -3,6 +3,9 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
+import preprocess from 'svelte-preprocess';
+import sass from 'rollup-plugin-sass';
+import scss from 'rollup-plugin-scss';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -36,14 +39,25 @@ export default {
 		file: 'public/build/bundle.js'
 	},
 	plugins: [
+		sass({
+	 	 	// node_modules is probably only necessary if you need to import from a css library
+			includePaths: ["./src/styles", "node_modules"],
+			// save all global style in build folder
+			 output: 'public/global.css',
+			 watch: './src/assets/scss/styles.scss'
+		}),
+		scss({
+			output: true,
+			sass: require('sass'),
+			processor: css => postcss([autoprefixer({ overrideBrowserslist: "Edge 18" })]),
+			watch: './src/assets/scss/styles.scss'
+		}),
 		svelte({
 			// enable run-time checks when not in production
-			dev: !production,
-			// we'll extract any component CSS out into
-			// a separate file - better for performance
-			css: css => {
-				css.write('bundle.css');
-			}
+      dev: !production,
+      hydratable: true,
+      emitCss: true,
+      preprocess: preprocess()
 		}),
 
 		// If you have external dependencies installed from
