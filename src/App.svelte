@@ -1,10 +1,10 @@
-<main class="app">
-  <Homepage />
-</main>
+<body class="app">
+	<Home />
+</body>
 
 <script>
-  import Homepage from './views/pages/Homepage.svelte'
+	import Home from './views/pages/Home.svelte'
 </script>
 
-<style>
+<style lang="scss">
 </style>

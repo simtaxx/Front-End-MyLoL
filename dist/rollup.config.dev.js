@@ -17,8 +17,6 @@ var _rollupPluginTerser = require("rollup-plugin-terser");
 
 var _sveltePreprocess = _interopRequireDefault(require("svelte-preprocess"));
 
-var _rollupPluginSass = _interopRequireDefault(require("rollup-plugin-sass"));
-
 var _rollupPluginScss = _interopRequireDefault(require("rollup-plugin-scss"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -53,26 +51,8 @@ var _default = {
     name: 'app',
     file: 'public/build/bundle.js'
   },
-  plugins: [(0, _rollupPluginSass["default"])({
-    // node_modules is probably only necessary if you need to import from a css library
-    includePaths: ["./src/styles", "node_modules"],
-    // save all global style in build folder
-    output: 'public/global.css',
-    watch: './src/assets/scss/styles.scss'
-  }), (0, _rollupPluginScss["default"])({
-    output: true,
-    sass: require('sass'),
-    processor: function processor(css) {
-      return postcss([autoprefixer({
-        overrideBrowserslist: "Edge 18"
-      })]);
-    },
-    watch: './src/assets/scss/styles.scss'
-  }), (0, _rollupPluginSvelte["default"])({
-    // enable run-time checks when not in production
+  plugins: [(0, _rollupPluginSvelte["default"])({
     dev: !production,
-    hydratable: true,
-    emitCss: true,
     preprocess: (0, _sveltePreprocess["default"])()
   }), // If you have external dependencies installed from
   // npm, you'll most likely need these plugins. In
@@ -88,7 +68,7 @@ var _default = {
   // browser on changes when not in production
   !production && (0, _rollupPluginLivereload["default"])('public'), // If we're building for production (npm run build
   // instead of npm run dev), minify
-  production && (0, _rollupPluginTerser.terser)()],
+  production && (0, _rollupPluginTerser.terser)(), (0, _rollupPluginScss["default"])()],
   watch: {
     clearScreen: false
   }

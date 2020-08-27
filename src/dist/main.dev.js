@@ -7,7 +7,7 @@ exports["default"] = void 0;
 
 var _App = _interopRequireDefault(require("./App.svelte"));
 
-require("./assets/scss/styles.scss");
+require("./styles/styles.scss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
