@@ -3,6 +3,15 @@
 </div>
 
 <script>
+  import { onMount } from 'svelte';
+  import { getPlayerData } from "../../services/apiCalls/playerData";
+
+  let playerData = null
+
+  onMount(async () => {
+    const res = await getPlayerData();
+    playerData = res;
+  });
 </script>
 
 <style lang="scss">
