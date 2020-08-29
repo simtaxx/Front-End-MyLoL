@@ -12,6 +12,7 @@
         <label for="flexQ">flexQ</label>
       </div>
     </div>
+    <button class="home__submit">Rechercher</button>
   </form>
   {#if playerData.loaded}
     <div>
@@ -81,6 +82,11 @@
       justify-content: space-between;
       width: 150px;
       margin: 20px auto 0;
+    }
+
+    &__submit {
+      text-align: center;
+      margin-top: 20px;
     }
   }
 </style>
