@@ -10,7 +10,7 @@ var _axios = _interopRequireDefault(require("axios"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var axiosAPI = _axios["default"].create({
-  baseURL: "http://localhost:3103"
+  baseURL: "https://my-lol.herokuapp.com"
 });
 
 var apiRequest = function apiRequest(method, url, request) {

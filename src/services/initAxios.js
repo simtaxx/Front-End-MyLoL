@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosAPI = axios.create({
-  baseURL : "http://localhost:3103" 
+  baseURL : "https://my-lol.herokuapp.com" 
 });
 
 const apiRequest = async (method, url, request) => {
