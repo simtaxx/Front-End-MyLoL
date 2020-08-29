@@ -42,7 +42,6 @@
       if (res.data) {
         selectedQueue === 'soloQ' ? playerData['infos'] = res.data[1] : playerData['infos'] = res.data[0]
         playerData.loaded = true
-        console.log(res.data[1])
       } else if (res.error) {
         playerData.error = res.error
       } else if (res.status.message) {
