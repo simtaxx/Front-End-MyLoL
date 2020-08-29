@@ -2,10 +2,9 @@
 import axios from "../initAxios";
 
 // Method to get a list of all Pokemon
-export const getPlayerData = async () => {
+export const getPlayerData = async (username) => {
     try {
-      const response = await axios.get("/player?username=je flex");
-      console.log(response)
+      const response = await axios.get(`/player?username=${username}`);
       return response;
     } catch (error) {
       console.error(error);

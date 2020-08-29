@@ -9,82 +9,50 @@ var _axios = _interopRequireDefault(require("axios"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-// Api.js
-// Create a instance of axios to use the same base url.
 var axiosAPI = _axios["default"].create({
-  baseURL: "http://localhost:3103" // it's not recommended to have this info here.
-
-}); // implement a method to execute all the request from here.
-
+  baseURL: "http://localhost:3103"
+});
 
 var apiRequest = function apiRequest(method, url, request) {
-  var headers, res;
+  var res;
   return regeneratorRuntime.async(function apiRequest$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          headers = {
-            authorization: ""
-          }; //using the axios instance to perform the request that received from each http method
-
-          _context.prev = 1;
-          _context.next = 4;
+          _context.prev = 0;
+          _context.next = 3;
           return regeneratorRuntime.awrap(axiosAPI({
             method: method,
             url: url,
-            data: request,
-            headers: headers
+            data: request
+            /* ,
+            headers */
+
           }));
 
-        case 4:
+        case 3:
           res = _context.sent;
           return _context.abrupt("return", Promise.resolve(res.data));
 
-        case 8:
-          _context.prev = 8;
-          _context.t0 = _context["catch"](1);
+        case 7:
+          _context.prev = 7;
+          _context.t0 = _context["catch"](0);
           return _context.abrupt("return", Promise.reject(_context.t0));
 
-        case 11:
+        case 10:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[1, 8]]);
-}; // function to execute the http get request
-
+  }, null, null, [[0, 7]]);
+};
 
 var get = function get(url, request) {
   return apiRequest("get", url, request);
-}; // function to execute the http delete request
-
-
-var deleteRequest = function deleteRequest(url, request) {
-  return apiRequest("delete", url, request);
-}; // function to execute the http post request
-
-
-var post = function post(url, request) {
-  return apiRequest("post", url, request);
-}; // function to execute the http put request
-
-
-var put = function put(url, request) {
-  return apiRequest("put", url, request);
-}; // function to execute the http path request
-
-
-var patch = function patch(url, request) {
-  return apiRequest("patch", url, request);
-}; // expose your method to other services or actions
-
+};
 
 var initAxios = {
-  get: get,
-  "delete": deleteRequest,
-  post: post,
-  put: put,
-  patch: patch
+  get: get
 };
 var _default = initAxios;
 exports["default"] = _default;
