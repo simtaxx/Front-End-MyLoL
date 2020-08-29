@@ -39,12 +39,23 @@
     playerData = {}
     if (playerName.length) {
       const res = await getPlayerData(playerName)
-      if (res.data) {
+      if (res.data[1]) {
         selectedQueue === 'soloQ' ? playerData['infos'] = res.data[1] : playerData['infos'] = res.data[0]
         playerData.loaded = true
+      } else if (res.data[1] === undefined) {
+        if (res.data[0]['queueType'] !== 'RANKED_SOLO_5x5') {
+          if (selectedQueue !== 'soloQ') {
+            playerData.loaded = true
+          } else playerData['error'] = "Ce joueur n'a pas de games en soloQ" 
+        } else {
+          if (selectedQueue !== 'flexQ') {
+            playerData.loaded = true
+          } else playerData['error'] = "Ce joueur n'a pas de games en flexQ"
+        }
+        playerData['infos'] = res.data[0]
       } else if (res.error) {
         playerData.error = res.error
-      } else if (res.status.message) {
+      } else if (res.status) {
         playerData.error = res.status.message
       }
     }
